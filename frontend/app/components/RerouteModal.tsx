@@ -91,8 +91,7 @@ export const RerouteModal: React.FC<RerouteModalProps> = ({
           </div>
 
           <div className="text-[11px] text-slate-400 text-center">
-            We’ll keep your navigation focused on calmer, cleaner options. / 我们会优先选择
-            更安静、空气更好的路线～
+            We’ll keep your navigation focused on calmer, cleaner options. 
           </div>
         </div>
       </div>
