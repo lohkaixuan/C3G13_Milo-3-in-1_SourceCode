@@ -151,7 +151,7 @@ export const NavigationView: React.FC<NavigationViewProps> = ({
     // Note: We keep min-h-screen for initial layout but scrolling is now handled by fixed/sticky elements
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#E6F7F7] to-white"> 
       {/* 顶部 header - STICKY (Fixed at the top of the content flow) */}
-      <header className="sticky top-0 z-30 bg-white/95 backdrop-blur">
+      <header id="navigation-header" className="sticky top-0 z-30 bg-white/95 backdrop-blur">
         <div className="px-6 pt-4 pb-3 flex items-center justify-between gap-4 max-w-6xl mx-auto">
           <div className="flex items-center gap-3">
             {onExit && (
@@ -210,18 +210,17 @@ export const NavigationView: React.FC<NavigationViewProps> = ({
         </div>
       </header>
 
-      {/* FIXED MAP CARD SECTION - 地图固定在这里！高度动态调整！*/}
-      {/* top-[180px] is fixed. We use calc(100vh - 180px - 110px) to set the remaining height dynamically. 110px is an estimate of the footer height plus its margins. */}
+      {/* 🌟 FIXED MAP CARD SECTION - Simplified Fixed Positioning 🌟 */}
+      {/* Set top based on header height (approx 180px) and bottom based on footer height (approx 110px). */}
+      {/* We use 'fixed' and absolute positioning instead of complex calc() for better responsiveness. */}
+      {/* NOTE: If you need to support variable header/footer heights, consider a custom hook for calculating these values. */}
       <div 
-        className="fixed top-[180px] left-1/2 -translate-x-1/2 z-10 w-full max-w-6xl px-6"
-        style={{ 
-          pointerEvents: 'none',
-          height: 'calc(100vh - 180px - 110px)', // Dynamic height calculation
-        }}
+        className="fixed inset-x-0 top-[180px] bottom-[110px] z-10 max-w-6xl mx-auto px-6"
+        style={{ pointerEvents: 'none' }}
       >
         {/* Map Card Wrapper */}
         <div 
-          className="rounded-3xl bg-white shadow-md px-4 pt-4 pb-5 h-full flex flex-col" // Use flex-col and h-full
+          className="rounded-3xl bg-white shadow-md px-4 pt-4 pb-5 h-full flex flex-col"
           style={{ pointerEvents: 'auto' }}
         >
           <div className="flex items-center justify-between text-xs text-slate-500 px-1">
@@ -263,12 +262,15 @@ export const NavigationView: React.FC<NavigationViewProps> = ({
       {/* END FIXED MAP CARD SECTION */}
 
       {/* 中间：地图卡片（现在已经固定，MAIN is empty of content and scroll-related classes) */}
-      <main className="flex-1"></main> 
+      {/* Added margin-top to push the main content flow below the fixed header area */}
+      <main className="flex-1 mt-[180px]"></main> 
 
       {/* 底部固定 summary 卡片 - STICKY */}
       <footer className="sticky bottom-0 z-20 px-6 pb-6 pt-4 bg-gradient-to-t from-white via-white/95 to-transparent">
         <div className="mx-auto max-w-3xl rounded-3xl bg-white shadow-md px-5 py-4">
-          <div className="flex items-center justify-between gap-4">
+          
+          {/* Main info row: Changed to flex-wrap to handle narrow screens gracefully */}
+          <div className="flex flex-wrap items-center justify-between gap-4"> 
             <div className="flex items-center gap-3">
               <div className="rounded-2xl bg-[#E6F7F7] p-2">
                 <Award className="w-5 h-5 text-[#2C7A7B]" />
@@ -285,7 +287,8 @@ export const NavigationView: React.FC<NavigationViewProps> = ({
               </div>
             </div>
 
-            <div className="flex items-center gap-4 text-[11px] text-slate-500">
+            {/* 🌟 FIX: Stacked the detail stats (weather, AQI, Hydration) on small screens */}
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 text-[11px] text-slate-500">
               <div className="flex items-center gap-1">
                 <CloudSun className="w-4 h-4" />
                 <span>
