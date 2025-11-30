@@ -147,13 +147,15 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ routes, onClose 
             compared to the fast route. This is equivalent to breathing cleaner air for the entire journey.
           </p>
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white bg-opacity-20 rounded-2xl p-4">
-              <div className="text-2xl mb-1">{healthRoute.co2Saved}g</div>
-              <div className="text-xs opacity-90">CO₂ Saved</div>
+            {/* Zen Route - CO2 Saved (FIXED: Added text-[...] classes) */}
+            <div className="bg-white rounded-2xl p-4">
+              <div className="text-2xl mb-1 text-[var(--color-primary)]">{healthRoute.co2Saved}g</div>
+              <div className="text-xs opacity-90 text-[var(--color-text-secondary)]">CO₂ Saved</div>
             </div>
-            <div className="bg-white bg-opacity-20 rounded-2xl p-4">
-              <div className="text-2xl mb-1">{healthRoute.caloriesBurned}</div>
-              <div className="text-xs opacity-90">Calories Burned</div>
+            {/* Zen Route - Calories Burned (FIXED: Added text-[...] classes) */}
+            <div className="bg-white rounded-2xl p-4">
+              <div className="text-2xl mb-1 text-[var(--color-primary)]">{healthRoute.caloriesBurned}</div>
+              <div className="text-xs opacity-90 text-[var(--color-text-secondary)]">Calories Burned</div>
             </div>
           </div>
         </div>
